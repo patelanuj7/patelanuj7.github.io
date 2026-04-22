@@ -704,28 +704,35 @@
         </div>
 
         <!-- Project Write-Up -->
-        <div class="fp-content">
-          <h3>Project Overview</h3>
-          <p>The NBA Score Indicator is a device designed to provide at-a-glance sports updates without the distraction of a smartphone. Using an 
-            ESP32-C6 microcontroller, the system fetches live game data using ESPN's API to display the current score of a selected game on a uLCD-144G2 color display, 
-            allowing for a focused work environment while staying connected to the game.</p>
-
-          <h3>Background &amp; Motivation</h3>
-          <p>My interest in this project comes from wanting to connect cloud-based data and physical indicators. I noticed how frequently checking scores on my phone 
-            disrupted my work flow. This led me to explore how embedded systems can act as tools that convey real-time 
+<div class="fp-content">
+          <h3>Discovery Project Idea</h3>
+          <p>The NBA Score Indicator is a device designed to provide at-a-glance sports updates without the distraction of a smartphone. Using an
+            ESP32-C6 microcontroller, the system gets live game data using ESPN's API to display the current score of a selected game on a uLCD-144G2 color display.  I noticed how frequently checking scores on my phone
+            disrupted my work flow. This led me to explore how embedded systems can act as tools that convey real-time
             information through distraction-free hardware.</p>
 
-          <h3>Design &amp; Methodology</h3>
-          <p>The design involves three steps: data acquisition, processing, and output. I chose the ESP32-C6 for its integrated WiFi capabilities. I initially planned to use two 
-            LEDs as indicators, but chose and LCD display to show richer information, including the team names and actual scores.</p>
-
-          <p>The architecture connects the ESP32-C6 to ESPN's public scoreboard API. On the software side, the microcontroller connects to WiFi, 
-            performs a periodic HTTP GET request, parses the resulting JSON to find the team names and scores, and displays the selected game on the LCD. The code was written in C and 
+          <h3>Project Progress</h3>
+          <p>The design involves three steps: data acquisition, processing, and output. I chose the ESP32-C6 for its integrated WiFi capabilities. I initially planned to use two
+            LEDs as indicators, but chose an LCD display instead so I could display the team names and actual scores.
+            The architecture connects the ESP32-C6 to ESPN's public scoreboard API. On the software side, the microcontroller connects to WiFi,
+            performs a HTTP GET request every 30 seconds, parses the resulting JSON to find the team names and scores, and displays the selected game on the LCD. The code was written in C and
             includes a test mode that displays hardcoded game data for development without requiring a live API call.</p>
 
-          <h3>Results &amp; Findings</h3>
-          <p>The hardcoded display mode is fully functional and tested, with team names and scores rendering correctly on the uLCD screen. 
-            The live API functionality has been written but not yet fully tested and debugged. Completing the live mode is the next step for this project.</p>
+          <h3>Project Successes and Failures</h3>
+          <p>The hardcoded display mode is fully functional and tested, with team names and scores rendering correctly on the uLCD screen.
+            The biggest challenge was learning to write the project in C, a language I had limited experience with coming in.
+            Getting text to render correctly on the uLCD screen also proved more difficult than expected, as it was hard to coordinate positioning and display initialization before anything showed up properly.
+            The live API functionality has been written but is not yet fully tested and debugged, which is the biggest roadblock going into the next parts of the project.</p>
+
+          <h3>ECE Skills Gained</h3>
+          <p>This project gave me hands-on experience with several core ECE skills. Working with the ESP32-C6 introduced me to microcontroller programming at a low level.
+            Integrating ESPN's scoreboard API required implementing HTTP GET requests and parsing the resulting JSON response, which taught me how software on a device communicates with cloud services.
+            On the hardware side, working with the display helped my understanding of hardware-software integration.</p>
+
+          <h3>Final Thoughts</h3>
+          <p>Overall, this project was very valuable hands-on experience. Starting from just an idea and building something that physically displays live data was challenging and rewarding.
+            This is the first hardware project I've done, so actually writing embedded C and debugging hardware-software interactions confirmed that this is exactly the type of work I want to pursue.
+           I plan to continue working on it, with the goal of finishing the live API mode so the project works in real-time..</p>
         </div>
       </div>
     </div>
