@@ -7,357 +7,370 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --navy: #0a1628;
-    --navy-mid: #162440;
-    --navy-light: #1e3a5f;
-    --gold: #b8960c;
-    --gold-light: #d4aa1e;
-    --slate: #4a5568;
-    --slate-light: #718096;
-    --mist: #e8edf4;
-    --white: #ffffff;
-    --off-white: #f7f9fc;
-    --border: #d1dbe8;
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-    --shadow-sm: 0 2px 8px rgba(10,22,40,0.08);
-    --shadow-md: 0 8px 32px rgba(10,22,40,0.12);
-    --shadow-lg: 0 20px 60px rgba(10,22,40,0.18);
-    --radius: 4px;
-    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--font-body);
-    background: var(--off-white);
-    color: var(--navy);
-    line-height: 1.7;
-    font-size: 16px;
-    overflow-x: hidden;
-  }
-
-  /* ─── NAVIGATION ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(10,22,40,0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(184,150,12,0.25);
-    padding: 0 2rem; height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: var(--transition);
-  }
-  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
-  .nav-links a {
-    color: rgba(255,255,255,0.7); text-decoration: none;
-    font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
-    padding: 0.45rem 0.9rem; border-radius: var(--radius);
-    transition: var(--transition); text-transform: uppercase;
-  }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(184,150,12,0.2); }
-  .nav-links a.active { color: var(--gold-light); }
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 24px; height: 2px;
-    background: var(--white); border-radius: 2px; transition: var(--transition);
-  }
-  .mobile-menu {
-    display: none; position: fixed; top: 64px; left: 0; right: 0;
-    background: var(--navy); z-index: 99;
-    padding: 1rem 2rem 2rem; border-bottom: 1px solid rgba(184,150,12,0.2);
-  }
-  .mobile-menu.open { display: block; }
-  .mobile-menu a {
-    display: block; padding: 0.9rem 0; color: rgba(255,255,255,0.8);
-    text-decoration: none; font-weight: 500; font-size: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.06); letter-spacing: 0.3px;
-  }
-  .mobile-menu a:hover { color: var(--gold-light); }
-
-  /* ─── PAGES ─── */
-  .page { display: none; padding-top: 64px; min-height: 100vh; }
-  .page.active { display: block; }
-
-  /* ─── HOME ─── */
-  .hero {
-    background: linear-gradient(150deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
-    position: relative; overflow: hidden;
-    padding: 7rem 2rem 5rem; text-align: center;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-      radial-gradient(ellipse 800px 600px at 60% 40%, rgba(184,150,12,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 400px 400px at 20% 80%, rgba(30,58,95,0.4) 0%, transparent 60%);
-  }
-  .hero-grid-overlay {
-    position: absolute; inset: 0; opacity: 0.04;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-  .hero h1 {
-    font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem);
-    font-weight: 700; color: var(--white); line-height: 1.15;
-    letter-spacing: -1px; margin-bottom: 1.5rem;
-  }
-  .hero-photo-ring {
-    width: 160px; height: 160px; margin: 0 auto 2rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold), var(--navy-light));
-    padding: 3px;
-    box-shadow: 0 0 0 6px rgba(184,150,12,0.15), var(--shadow-lg);
-  }
-  .hero-photo-inner {
-    width: 100%; height: 100%; border-radius: 50%;
-    background: linear-gradient(135deg, #2a4a7f, #1a3a6f);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-  .hero-avatar {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center 18%;
-    border-radius: 50%;
-  }
-  .hero-summary {
-    font-size: 1.1rem; color: rgba(255,255,255,0.75); line-height: 1.8;
-    max-width: 640px; margin: 0 auto 2.5rem; font-weight: 300;
-  }
-  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--navy); padding: 0.8rem 1.8rem;
-    border-radius: var(--radius); font-weight: 600; font-size: 14px;
-    text-decoration: none; letter-spacing: 0.3px;
-    transition: var(--transition); border: none; cursor: pointer;
-    box-shadow: 0 4px 16px rgba(184,150,12,0.35);
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,150,12,0.45); }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: transparent; color: var(--white);
-    padding: 0.8rem 1.8rem; border-radius: var(--radius);
-    font-weight: 500; font-size: 14px; text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.25); transition: var(--transition);
-    cursor: pointer; letter-spacing: 0.3px;
-  }
-  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
-  .github-link {
-    color: var(--gold-light); font-weight: 600; text-decoration: none;
-    border-bottom: 1px solid rgba(212,170,30,0.4); transition: var(--transition);
-  }
-  .github-link:hover { color: var(--white); border-bottom-color: var(--white); }
-
-  /* ─── SECTIONS ─── */
-  .section-container { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
-  .section-label {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 11px; font-weight: 600; color: var(--gold);
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;
-  }
-  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--gold); display: inline-block; }
-  .section-title {
-    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 1.5rem;
-  }
-  .home-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .home-summary-text p { color: var(--slate); font-size: 1.05rem; margin-bottom: 1.2rem; line-height: 1.9; }
-  .home-summary-text p:first-of-type {
-    font-size: 1.15rem; color: var(--navy); font-weight: 400;
-    border-left: 3px solid var(--gold); padding-left: 1.2rem;
-  }
-  .featured-image-card { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg); }
-  .img-placeholder {
-    width: 100%; aspect-ratio: 4/3;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.75rem; font-size: 13px; font-weight: 500;
-    color: rgba(255,255,255,0.6); text-align: center; padding: 2rem;
-  }
-  .img-placeholder .img-icon { font-size: 2.5rem; opacity: 0.7; }
-  .img-placeholder.blue { background: linear-gradient(135deg, #1a3a6f, #2a5a9f); }
-  .img-placeholder.teal { background: linear-gradient(135deg, #1a4a5f, #2a6a7f); }
-  .img-placeholder.green { background: linear-gradient(135deg, #1a4a2f, #2a6a4f); }
-  .img-placeholder.purple { background: linear-gradient(135deg, #2a1a5f, #4a2a8f); }
-  .img-placeholder.dark { background: linear-gradient(135deg, #1a1a2f, #2a2a4f); }
-  .quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-  .quick-link-card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 8px;
-    padding: 1.8rem 1.5rem; text-align: center;
-    transition: var(--transition); text-decoration: none; cursor: pointer; display: block;
-  }
-  .quick-link-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-md); }
-  .ql-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-  .ql-title { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 0.4rem; }
-  .ql-desc { font-size: 12px; color: var(--slate-light); line-height: 1.5; }
-
-  /* ─── ABOUT ─── */
-  .about-hero {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    padding: 5rem 2rem 4rem;
-  }
-  .page-hero-inner { max-width: 1100px; margin: 0 auto; }
-  .page-hero-eyebrow {
-    font-size: 11px; font-weight: 600; color: var(--gold-light);
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .page-hero-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--gold); display: inline-block; }
-  .page-title {
-    font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.8rem);
-    font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 1rem;
-  }
-  .page-subtitle { color: rgba(255,255,255,0.6); font-size: 1.1rem; max-width: 520px; }
-  .about-layout { display: grid; grid-template-columns: 340px 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
-  .profile-card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden; box-shadow: var(--shadow-sm); position: sticky; top: 84px;
-  }
-  .profile-card-header {
-    background: linear-gradient(135deg, var(--navy), var(--navy-light));
-    padding: 2rem; text-align: center;
-  }
-  .profile-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--white); }
-  .profile-title { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 0.3rem; letter-spacing: 0.3px; }
-  .profile-body { padding: 1.5rem; }
-  .profile-detail {
-    display: flex; align-items: flex-start; gap: 0.75rem;
-    padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 13px;
-  }
-  .profile-detail:last-child { border-bottom: none; }
-  .pd-icon { color: var(--gold); font-size: 15px; margin-top: 2px; flex-shrink: 0; }
-  .pd-label { color: var(--slate-light); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 1px; }
-  .pd-value { color: var(--navy); font-weight: 500; }
-  .skills-card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 12px;
-    padding: 1.5rem; margin-top: 1.5rem; box-shadow: var(--shadow-sm);
-  }
-  .skills-card h4 { font-size: 13px; font-weight: 600; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
-  .skill-tag {
-    display: inline-block; background: var(--mist); color: var(--navy-light);
-    border: 1px solid var(--border); border-radius: 100px;
-    font-size: 11px; font-weight: 500; padding: 0.3rem 0.8rem; margin: 0.25rem 0.2rem;
-  }
-  .bio-section { margin-bottom: 3rem; }
-  .bio-section h3 {
-    font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 1.2rem;
-    padding-bottom: 0.6rem; border-bottom: 2px solid var(--mist);
-  }
-  .bio-section p { color: var(--slate); font-size: 1rem; line-height: 1.9; margin-bottom: 1.1rem; }
-
-  /* ─── RESUME ─── */
-  .resume-controls {
-    max-width: 900px; margin: 0 auto; padding: 3rem 2rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  }
-  .resume-controls h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--navy); }
-
-  /* ─── CAREER GOALS ─── */
-  .roadmap-section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
-  .roadmap-intro { max-width: 680px; margin-bottom: 4rem; }
-  .roadmap-intro p { font-size: 1.1rem; color: var(--slate); line-height: 1.9; margin-bottom: 1rem; }
-  .roadmap-phases { position: relative; }
-  .roadmap-phases::before {
-    content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 3px;
-    background: linear-gradient(to bottom, var(--gold), var(--navy-light)); border-radius: 2px;
-  }
-  .phase-item { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; padding-bottom: 3rem; position: relative; }
-  .phase-number {
-    width: 58px; height: 58px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
-    color: var(--navy); z-index: 1; position: relative;
-    box-shadow: 0 4px 16px rgba(184,150,12,0.35);
-  }
-  .phase-card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-    padding: 2rem; box-shadow: var(--shadow-sm); transition: var(--transition);
-  }
-  .phase-card:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
-  .phase-timeline { font-family: var(--font-mono); font-size: 11px; color: var(--gold); font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .phase-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 0.8rem; }
-  .phase-desc { font-size: 14px; color: var(--slate); line-height: 1.8; margin-bottom: 1rem; }
-  .phase-milestones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .milestone-tag {
-    background: var(--mist); border: 1px solid var(--border); border-radius: 100px;
-    font-size: 12px; font-weight: 500; color: var(--navy-light); padding: 0.3rem 0.9rem;
-  }
-
-  /* ─── PROJECTS ─── */
-  .projects-section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
-  .featured-project {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: 4rem;
-  }
-  .fp-banner {
-    background: linear-gradient(135deg, var(--navy), var(--navy-light));
-    padding: 2rem 2.5rem;
-  }
-  .fp-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--white); margin-top: 0.5rem; }
-  .fp-subtitle { color: rgba(255,255,255,0.65); font-size: 14px; margin-top: 0.4rem; }
-  .fp-body { padding: 2.5rem; }
-  .fp-content h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--navy); margin-bottom: 0.8rem; margin-top: 2rem; }
-  .fp-content h3:first-child { margin-top: 0; }
-  .fp-content p { color: var(--slate); font-size: 14.5px; line-height: 1.9; margin-bottom: 1rem; }
-  .other-projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .project-card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-    overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);
-  }
-  .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-  .pc-image img { width: 100%; height: 200px; object-fit: cover; display: block; }
-  .pc-body { padding: 1.5rem; }
-  .pc-category { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .pc-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.6rem; line-height: 1.3; }
-  .pc-desc { font-size: 13px; color: var(--slate); line-height: 1.7; }
-  .pc-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .pc-tech { font-size: 11px; background: var(--mist); padding: 0.2rem 0.6rem; border-radius: 3px; color: var(--navy-light); font-family: var(--font-mono); }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--navy); color: rgba(255,255,255,0.6);
-    text-align: center; padding: 2.5rem 2rem;
-    font-size: 13px; border-top: 1px solid rgba(184,150,12,0.2);
-  }
-  footer .gt-logo { font-family: var(--font-display); color: var(--white); font-weight: 700; }
-
-  /* ─── UTILITIES ─── */
-  .divider { border: none; height: 1px; background: var(--border); margin: 0; }
-  .section-alt { background: var(--white); }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-    .home-summary-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .profile-card { position: static; }
-    .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
-    .other-projects-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 600px) {
-    .hero { padding: 5rem 1.5rem 3rem; }
-    .section-container { padding: 3rem 1.5rem; }
-    .quick-links-grid { grid-template-columns: 1fr 1fr; }
-    .fp-body { padding: 1.5rem; }
-    .roadmap-phases::before { left: 24px; }
-    .phase-item { grid-template-columns: 50px 1fr; gap: 1rem; }
-    .phase-number { width: 48px; height: 48px; font-size: 1.1rem; }
-  }
+:root {
+  --navy: #0a1628;
+  --navy-mid: #162440;
+  --navy-light: #1e3a5f;
+  --gold: #b8960c;
+  --gold-light: #d4aa1e;
+  --slate: #4a5568;
+  --slate-light: #718096;
+  --mist: #e8edf4;
+  --white: #ffffff;
+  --off-white: #f7f9fc;
+  --border: #d1dbe8;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --shadow-sm: 0 2px 8px rgba(10,22,40,0.08);
+  --shadow-md: 0 8px 32px rgba(10,22,40,0.12);
+  --shadow-lg: 0 20px 60px rgba(10,22,40,0.18);
+  --radius: 4px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+ 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--off-white);
+  color: var(--navy);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+ 
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,22,40,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,150,12,0.25);
+  padding: 0 2rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: var(--transition);
+}
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+  padding: 0.45rem 0.9rem; border-radius: var(--radius);
+  transition: var(--transition); text-transform: uppercase;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(184,150,12,0.2); }
+.nav-links a.active { color: var(--gold-light); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white); border-radius: 2px; transition: var(--transition);
+}
+.mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--navy); z-index: 99;
+  padding: 1rem 2rem 2rem; border-bottom: 1px solid rgba(184,150,12,0.2);
+}
+.mobile-menu.open { display: block; }
+.mobile-menu a {
+  display: block; padding: 0.9rem 0; color: rgba(255,255,255,0.8);
+  text-decoration: none; font-weight: 500; font-size: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.06); letter-spacing: 0.3px;
+}
+.mobile-menu a:hover { color: var(--gold-light); }
+ 
+/* ─── PAGES ─── */
+.page { display: none; padding-top: 64px; min-height: 100vh; }
+.page.active { display: block; }
+ 
+/* ─── HOME ─── */
+.hero {
+  background: linear-gradient(150deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+  position: relative; overflow: hidden;
+  padding: 7rem 2rem 5rem; text-align: center;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(ellipse 800px 600px at 60% 40%, rgba(184,150,12,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 400px at 20% 80%, rgba(30,58,95,0.4) 0%, transparent 60%);
+}
+.hero-grid-overlay {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+.hero h1 {
+  font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 700; color: var(--white); line-height: 1.15;
+  letter-spacing: -1px; margin-bottom: 1.5rem;
+}
+.hero-photo-ring {
+  width: 160px; height: 160px; margin: 0 auto 2rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--navy-light));
+  padding: 3px;
+  box-shadow: 0 0 0 6px rgba(184,150,12,0.15), var(--shadow-lg);
+}
+.hero-photo-inner {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: linear-gradient(135deg, #2a4a7f, #1a3a6f);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-avatar {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 18%;
+  border-radius: 50%;
+}
+.hero-summary {
+  font-size: 1.1rem; color: rgba(255,255,255,0.75); line-height: 1.8;
+  max-width: 640px; margin: 0 auto 2.5rem; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy); padding: 0.8rem 1.8rem;
+  border-radius: var(--radius); font-weight: 600; font-size: 14px;
+  text-decoration: none; letter-spacing: 0.3px;
+  transition: var(--transition); border: none; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(184,150,12,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,150,12,0.45); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; color: var(--white);
+  padding: 0.8rem 1.8rem; border-radius: var(--radius);
+  font-weight: 500; font-size: 14px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25); transition: var(--transition);
+  cursor: pointer; letter-spacing: 0.3px;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+.github-link {
+  color: var(--gold-light); font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid rgba(212,170,30,0.4); transition: var(--transition);
+}
+.github-link:hover { color: var(--white); border-bottom-color: var(--white); }
+ 
+/* ─── SECTIONS ─── */
+.section-container { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 11px; font-weight: 600; color: var(--gold);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;
+}
+.section-label::before { content: ''; width: 24px; height: 2px; background: var(--gold); display: inline-block; }
+.section-title {
+  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 1.5rem;
+}
+.home-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.home-summary-text p { color: var(--slate); font-size: 1.05rem; margin-bottom: 1.2rem; line-height: 1.9; }
+.home-summary-text p:first-of-type {
+  font-size: 1.15rem; color: var(--navy); font-weight: 400;
+  border-left: 3px solid var(--gold); padding-left: 1.2rem;
+}
+.featured-image-card { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg); }
+.img-placeholder {
+  width: 100%; aspect-ratio: 4/3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem; font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.6); text-align: center; padding: 2rem;
+}
+.img-placeholder .img-icon { font-size: 2.5rem; opacity: 0.7; }
+.img-placeholder.blue { background: linear-gradient(135deg, #1a3a6f, #2a5a9f); }
+.img-placeholder.teal { background: linear-gradient(135deg, #1a4a5f, #2a6a7f); }
+.img-placeholder.green { background: linear-gradient(135deg, #1a4a2f, #2a6a4f); }
+.img-placeholder.purple { background: linear-gradient(135deg, #2a1a5f, #4a2a8f); }
+.img-placeholder.dark { background: linear-gradient(135deg, #1a1a2f, #2a2a4f); }
+ 
+.quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.quick-link-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.8rem 1.5rem; text-align: center;
+  transition: var(--transition); text-decoration: none; cursor: pointer; display: block;
+}
+.quick-link-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.ql-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.ql-title { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 0.4rem; }
+.ql-desc { font-size: 12px; color: var(--slate-light); line-height: 1.5; }
+ 
+/* ─── ABOUT ─── */
+.about-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 5rem 2rem 4rem;
+}
+.page-hero-inner { max-width: 1100px; margin: 0 auto; }
+.page-hero-eyebrow {
+  font-size: 11px; font-weight: 600; color: var(--gold-light);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.page-hero-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--gold); display: inline-block; }
+.page-title {
+  font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 1rem;
+}
+.page-subtitle { color: rgba(255,255,255,0.6); font-size: 1.1rem; max-width: 520px; }
+ 
+.about-layout { display: grid; grid-template-columns: 340px 1fr; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+.profile-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; box-shadow: var(--shadow-sm); position: sticky; top: 84px;
+}
+.profile-card-header {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  padding: 2rem; text-align: center;
+}
+.profile-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--white); }
+.profile-title { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 0.3rem; letter-spacing: 0.3px; }
+.profile-body { padding: 1.5rem; }
+.profile-detail {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 13px;
+}
+.profile-detail:last-child { border-bottom: none; }
+.pd-icon { color: var(--gold); font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+.pd-label { color: var(--slate-light); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 1px; }
+.pd-value { color: var(--navy); font-weight: 500; }
+.skills-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.5rem; margin-top: 1.5rem; box-shadow: var(--shadow-sm);
+}
+.skills-card h4 { font-size: 13px; font-weight: 600; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+.skill-tag {
+  display: inline-block; background: var(--mist); color: var(--navy-light);
+  border: 1px solid var(--border); border-radius: 100px;
+  font-size: 11px; font-weight: 500; padding: 0.3rem 0.8rem; margin: 0.25rem 0.2rem;
+}
+.bio-section { margin-bottom: 3rem; }
+.bio-section h3 {
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem; border-bottom: 2px solid var(--mist);
+}
+.bio-section p { color: var(--slate); font-size: 1rem; line-height: 1.9; margin-bottom: 1.1rem; }
+ 
+/* ─── RESUME ─── */
+.resume-controls {
+  max-width: 900px; margin: 0 auto; padding: 3rem 2rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.resume-controls h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--navy); }
+ 
+/* ─── CAREER GOALS ─── */
+.roadmap-section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+.roadmap-intro { max-width: 680px; margin-bottom: 4rem; }
+.roadmap-intro p { font-size: 1.1rem; color: var(--slate); line-height: 1.9; margin-bottom: 1rem; }
+.roadmap-phases { position: relative; }
+.roadmap-phases::before {
+  content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--gold), var(--navy-light)); border-radius: 2px;
+}
+.phase-item { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; padding-bottom: 3rem; position: relative; }
+.phase-number {
+  width: 58px; height: 58px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
+  color: var(--navy); z-index: 1; position: relative;
+  box-shadow: 0 4px 16px rgba(184,150,12,0.35);
+}
+.phase-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  padding: 2rem; box-shadow: var(--shadow-sm); transition: var(--transition);
+}
+.phase-card:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+.phase-timeline { font-family: var(--font-mono); font-size: 11px; color: var(--gold); font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.phase-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 0.8rem; }
+.phase-desc { font-size: 14px; color: var(--slate); line-height: 1.8; margin-bottom: 1rem; }
+.phase-milestones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.milestone-tag {
+  background: var(--mist); border: 1px solid var(--border); border-radius: 100px;
+  font-size: 12px; font-weight: 500; color: var(--navy-light); padding: 0.3rem 0.9rem;
+}
+ 
+/* ─── PROJECTS ─── */
+.projects-section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+.featured-project {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: 4rem;
+}
+.fp-banner {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  padding: 2rem 2.5rem;
+}
+.fp-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--white); margin-top: 0.5rem; }
+.fp-subtitle { color: rgba(255,255,255,0.65); font-size: 14px; margin-top: 0.4rem; }
+.fp-body { padding: 2.5rem; }
+.fp-content h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--navy); margin-bottom: 0.8rem; margin-top: 2rem; }
+.fp-content h3:first-child { margin-top: 0; }
+.fp-content p { color: var(--slate); font-size: 14.5px; line-height: 1.9; margin-bottom: 1rem; }
+ 
+.other-projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.project-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.pc-image img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.pc-body { padding: 1.5rem; }
+.pc-category { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.pc-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.6rem; line-height: 1.3; }
+.pc-desc { font-size: 13px; color: var(--slate); line-height: 1.7; }
+.pc-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.pc-tech { font-size: 11px; background: var(--mist); padding: 0.2rem 0.6rem; border-radius: 3px; color: var(--navy-light); font-family: var(--font-mono); }
+ 
+/* ─── GT MOVIES STORE ─── */
+.video-wrap {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border-radius: 8px; overflow: hidden;
+  background: var(--navy); box-shadow: var(--shadow-md);
+  margin: 0.5rem 0 1.5rem;
+}
+.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.stack-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.75rem 0 2rem; }
+ 
+/* ─── FOOTER ─── */
+footer {
+  background: var(--navy); color: rgba(255,255,255,0.6);
+  text-align: center; padding: 2.5rem 2rem;
+  font-size: 13px; border-top: 1px solid rgba(184,150,12,0.2);
+}
+footer .gt-logo { font-family: var(--font-display); color: var(--white); font-weight: 700; }
+ 
+/* ─── UTILITIES ─── */
+.divider { border: none; height: 1px; background: var(--border); margin: 0; }
+.section-alt { background: var(--white); }
+ 
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .home-summary-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .profile-card { position: static; }
+  .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
+  .other-projects-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero { padding: 5rem 1.5rem 3rem; }
+  .section-container { padding: 3rem 1.5rem; }
+  .quick-links-grid { grid-template-columns: 1fr 1fr; }
+  .fp-body { padding: 1.5rem; }
+  .roadmap-phases::before { left: 24px; }
+  .phase-item { grid-template-columns: 50px 1fr; gap: 1rem; }
+  .phase-number { width: 48px; height: 48px; font-size: 1.1rem; }
+}
 </style>
 </head>
 <body>
-
+ 
 <!-- ─── NAVIGATION ─── -->
 <nav id="navbar">
   <ul class="nav-links">
@@ -366,20 +379,22 @@
     <li><a href="#" onclick="showPage('resume')" data-page="resume">Resume</a></li>
     <li><a href="#" onclick="showPage('goals')" data-page="goals">Career Goals</a></li>
     <li><a href="#" onclick="showPage('projects')" data-page="projects">Projects</a></li>
+    <li><a href="#" onclick="showPage('movies')" data-page="movies">GT Movies Store</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
+ 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#" onclick="showPage('home');toggleMenu()">🏠 Home</a>
   <a href="#" onclick="showPage('about');toggleMenu()">👤 About Me</a>
   <a href="#" onclick="showPage('resume');toggleMenu()">📄 Resume</a>
   <a href="#" onclick="showPage('goals');toggleMenu()">🎯 Career Goals</a>
   <a href="#" onclick="showPage('projects');toggleMenu()">🔬 Projects</a>
+  <a href="#" onclick="showPage('movies');toggleMenu()">🎬 GT Movies Store</a>
 </div>
-
+ 
 <!-- ═══════════════════════════════════════════════
      PAGE: HOME
 ════════════════════════════════════════════════ -->
@@ -405,7 +420,7 @@
       </div>
     </div>
   </section>
-
+ 
   <section class="section-container">
     <div class="home-summary-grid">
       <div class="home-summary-text">
@@ -424,9 +439,9 @@
       </div>
     </div>
   </section>
-
+ 
   <hr class="divider"/>
-
+ 
   <section class="section-alt">
     <div class="section-container" style="padding-top:3.5rem; padding-bottom:3.5rem;">
       <div class="section-label">Explore</div>
@@ -455,13 +470,13 @@
       </div>
     </div>
   </section>
-
+ 
   <footer>
     <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
     <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span id="year"></span></p>
   </footer>
 </div>
-
+ 
 <!-- ═══════════════════════════════════════════════
      PAGE: ABOUT
 ════════════════════════════════════════════════ -->
@@ -472,7 +487,7 @@
       <p class="page-subtitle">A detailed look at my background, journey into engineering, and what drives me forward.</p>
     </div>
   </section>
-
+ 
   <div class="about-layout">
     <aside class="about-sidebar">
       <div class="profile-card">
@@ -518,6 +533,7 @@
           </div>
         </div>
       </div>
+ 
       <div class="skills-card">
         <h4>Technical Skills</h4>
         <span class="skill-tag">Python</span>
@@ -530,38 +546,38 @@
         <span class="skill-tag">Linux</span>
       </div>
     </aside>
-
+ 
     <div class="about-content">
       <div class="bio-section">
         <h3>My Origin Story</h3>
         <p>After growing up in Alpharetta and attending Denmark High School, I realized through both my classroom coding
-          projects and independent exploration that I wasn't just interested in writing software, but in understanding the
-          hardware and semiconductors that make modern computing possible.</p>
+        projects and independent exploration that I wasn't just interested in writing software, but in understanding the
+        hardware and semiconductors that make modern computing possible.</p>
         <p>At Georgia Tech, I'm currently part of a VIP team working with IODA (Internet Outage Detection and Analysis), where I'm gaining
-          hands-on experience in monitoring and analyzing global internet connectivity. Looking ahead, I plan to participate in the ECE
-          Opportunity Research Scholars (ORS) program next year to further bridge the gap between my software and hardware skills
-          through research.</p>
+        hands-on experience in monitoring and analyzing global internet connectivity. Looking ahead, I plan to participate in the ECE
+        Opportunity Research Scholars (ORS) program next year to further bridge the gap between my software and hardware skills
+        through research.</p>
         <p>Looking ahead, I am working toward a career in semiconductor design and high-performance computing. I'm excited to continue
-          building the technical foundation necessary to develop the next generation of hardware. Feel free to explore my projects below
-          to see what I've been working on.</p>
+        building the technical foundation necessary to develop the next generation of hardware. Feel free to explore my projects below
+        to see what I've been working on.</p>
       </div>
-
+ 
       <div class="bio-section">
         <h3>Who I Am Beyond Engineering</h3>
         <p>I was born in Madhya Pradesh, India, before my family moved to the U.S. when I was a baby. Growing up, we lived in several
-          states before eventually settling in Georgia. At home, I am fluent in Hindi, which allows me to stay deeply connected to my
-          heritage. Outside of my engineering studies, I enjoy weightlifting and following sports. I've found that the same consistency
-          and discipline required to progress in the gym is exactly what I need when I try to push my technical skills to the next level.</p>
+        states before eventually settling in Georgia. At home, I am fluent in Hindi, which allows me to stay deeply connected to my
+        heritage. Outside of my engineering studies, I enjoy weightlifting and following sports. I've found that the same consistency
+        and discipline required to progress in the gym is exactly what I need when I try to push my technical skills to the next level.</p>
       </div>
     </div>
   </div>
-
+ 
   <footer>
     <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
     <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span class="year-footer"></span></p>
   </footer>
 </div>
-
+ 
 <!-- ═══════════════════════════════════════════════
      PAGE: RESUME
 ════════════════════════════════════════════════ -->
@@ -572,26 +588,26 @@
       <p class="page-subtitle">Professional resume — formatted for technical recruiting.</p>
     </div>
   </section>
-
+ 
   <div class="resume-controls">
     <h2>My Resume</h2>
     <a href="patelresume.pdf" download="Patel_Resume.pdf" class="btn-primary" style="text-decoration:none;">
       ↓ Download PDF
     </a>
   </div>
-
+ 
   <div style="background:#f4f4f4; padding:40px 20px; padding-bottom: 5rem;">
     <div style="max-width:850px; margin:0 auto; background:white; padding:10px; box-shadow:0 4px 20px rgba(0,0,0,0.15); border-radius:4px;">
       <img src="resumeimage.png" alt="My Resume" style="width:100%; height:auto; display:block; border:1px solid #eee;">
     </div>
   </div>
-
+ 
   <footer>
     <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
     <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span class="year-footer"></span></p>
   </footer>
 </div>
-
+ 
 <!-- ═══════════════════════════════════════════════
      PAGE: CAREER GOALS
 ════════════════════════════════════════════════ -->
@@ -601,15 +617,14 @@
       <h1 class="page-title">Career Goals</h1>
     </div>
   </section>
-
+ 
   <div class="roadmap-section">
     <h2 class="section-title">Where I'm Headed &amp; How I'll Get There</h2>
-
     <div class="roadmap-intro">
       <p>In the next 10–15 years, I envision myself as someone who specializes in the hardware-software interface of the next generation of semiconductors. My goal is to lead the design of computing systems that integrate VLSI logic with optimized software.</p>
       <p>I am driven by the need for energy efficient computing. As the demand for AI and global connectivity grows, our current hardware is reaching its thermal and power limits. I want to use my skills in Verilog and hardware-software design to build processors that provide more efficient performance to ensure technological innovation doesn't come at the cost of our planet's environment.</p>
     </div>
-
+ 
     <div class="roadmap-phases">
       <div class="phase-item">
         <div class="phase-number">1</div>
@@ -624,7 +639,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="phase-item">
         <div class="phase-number">2</div>
         <div class="phase-card">
@@ -638,7 +653,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="phase-item">
         <div class="phase-number">3</div>
         <div class="phase-card">
@@ -652,7 +667,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="phase-item">
         <div class="phase-number">4</div>
         <div class="phase-card">
@@ -668,13 +683,13 @@
       </div>
     </div>
   </div>
-
+ 
   <footer>
     <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
     <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span class="year-footer"></span></p>
   </footer>
 </div>
-
+ 
 <!-- ═══════════════════════════════════════════════
      PAGE: PROJECTS
 ════════════════════════════════════════════════ -->
@@ -688,59 +703,54 @@
       </p>
     </div>
   </section>
-
+ 
   <div class="projects-section">
-
     <div class="featured-project">
       <div class="fp-banner">
         <div class="fp-title">Discovery Project</div>
         <div class="fp-subtitle">NBA Lead Indicator — Indicates the lead of a live basketball game through an LCD Screen</div>
       </div>
-
       <div class="fp-body">
-        <!-- Project Image -->
         <div style="margin-bottom:2.5rem; border-radius:8px; overflow:hidden;">
           <img src="discovproj.png" alt="Discovery Project" style="width:100%; height:420px; object-fit:cover; display:block; border-radius:8px;">
         </div>
-
-        <!-- Project Write-Up -->
-<div class="fp-content">
+ 
+        <div class="fp-content">
           <h3>Discovery Project Idea</h3>
           <p>The NBA Score Indicator is a device designed to provide at-a-glance sports updates without the distraction of a smartphone. Using an
-            ESP32-C6 microcontroller, the system gets live game data using ESPN's API to display the current score of a selected game on a uLCD-144G2 color display.  I noticed how frequently checking scores on my phone
-            disrupted my work flow. This led me to explore how embedded systems can act as tools that convey real-time
-            information through distraction-free hardware.</p>
-
+          ESP32-C6 microcontroller, the system gets live game data using ESPN's API to display the current score of a selected game on a uLCD-144G2 color display. I noticed how frequently checking scores on my phone
+          disrupted my work flow. This led me to explore how embedded systems can act as tools that convey real-time
+          information through distraction-free hardware.</p>
+ 
           <h3>Project Progress</h3>
           <p>The design involves three steps: data acquisition, processing, and output. I chose the ESP32-C6 for its integrated WiFi capabilities. I initially planned to use two
-            LEDs as indicators, but chose an LCD display instead so I could display the team names and actual scores.
-            The architecture connects the ESP32-C6 to ESPN's public scoreboard API. On the software side, the microcontroller connects to WiFi,
-            performs a HTTP GET request every 30 seconds, parses the resulting JSON to find the team names and scores, and displays the selected game on the LCD. The code was written in C and
-            includes a test mode that displays hardcoded game data for development without requiring a live API call.</p>
-
+          LEDs as indicators, but chose an LCD display instead so I could display the team names and actual scores.
+          The architecture connects the ESP32-C6 to ESPN's public scoreboard API. On the software side, the microcontroller connects to WiFi,
+          performs a HTTP GET request every 30 seconds, parses the resulting JSON to find the team names and scores, and displays the selected game on the LCD. The code was written in C and
+          includes a test mode that displays hardcoded game data for development without requiring a live API call.</p>
+ 
           <h3>Project Successes and Failures</h3>
           <p>The hardcoded display mode is fully functional and tested, with team names and scores rendering correctly on the uLCD screen.
-            The biggest challenge was learning to write the project in C, a language I had limited experience with coming in.
-            Getting text to render correctly on the uLCD screen also proved more difficult than expected, as it was hard to coordinate positioning and display initialization before anything showed up properly.
-            The live API functionality has been written but is not yet fully tested and debugged, which is the biggest roadblock going into the next parts of the project.</p>
-
+          The biggest challenge was learning to write the project in C, a language I had limited experience with coming in.
+          Getting text to render correctly on the uLCD screen also proved more difficult than expected, as it was hard to coordinate positioning and display initialization before anything showed up properly.
+          The live API functionality has been written but is not yet fully tested and debugged, which is the biggest roadblock going into the next parts of the project.</p>
+ 
           <h3>ECE Skills Gained</h3>
           <p>This project gave me hands-on experience with several core ECE skills. Working with the ESP32-C6 introduced me to microcontroller programming at a low level.
-            Integrating ESPN's scoreboard API required implementing HTTP GET requests and parsing the resulting JSON response, which taught me how software on a device communicates with cloud services.
-            On the hardware side, working with the display helped my understanding of hardware-software integration.</p>
-
+          Integrating ESPN's scoreboard API required implementing HTTP GET requests and parsing the resulting JSON response, which taught me how software on a device communicates with cloud services.
+          On the hardware side, working with the display helped my understanding of hardware-software integration.</p>
+ 
           <h3>Final Thoughts</h3>
           <p>Overall, this project was very valuable experience. Starting from just an idea and building something that physically displays live data was challenging and rewarding.
-            This is the first hardware project I've done, so actually writing embedded C and debugging hardware-software interactions confirmed that this is exactly the type of work I want to pursue.
-           I plan to continue working on it, with the goal of finishing the live API mode so the project works in real-time.</p>
+          This is the first hardware project I've done, so actually writing embedded C and debugging hardware-software interactions confirmed that this is exactly the type of work I want to pursue.
+          I plan to continue working on it, with the goal of finishing the live API mode so the project works in real-time.</p>
         </div>
       </div>
     </div>
-
-    <!-- Other Projects -->
+ 
     <div class="section-label" style="margin-top:1rem;">More Work</div>
     <h2 class="section-title" style="margin-bottom:2rem;">Other Projects &amp; Explorations</h2>
-
+ 
     <div class="other-projects-grid">
       <div class="project-card">
         <div class="pc-image">
@@ -757,7 +767,7 @@
           <span class="pc-tech">JSON</span>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <div class="pc-image">
           <img src="calculator.png" alt="Desktop Scientific Calculator">
@@ -773,7 +783,7 @@
           <span class="pc-tech">OOP</span>
         </div>
       </div>
-
+ 
       <div class="project-card">
         <div class="pc-image">
           <img src="tictactoe.png" alt="Tic-Tac-Toe Game">
@@ -791,42 +801,160 @@
       </div>
     </div>
   </div>
-
+ 
   <footer>
     <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
     <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span class="year-footer"></span></p>
   </footer>
 </div>
-
+ 
+<!-- ═══════════════════════════════════════════════
+     PAGE: GT MOVIES STORE
+════════════════════════════════════════════════ -->
+<div id="page-movies" class="page">
+  <section class="about-hero">
+    <div class="page-hero-inner">
+      <h1 class="page-title">GT Movies Store</h1>
+      <p class="page-subtitle">A Django web application for browsing, reviewing, and buying movies — built from a set of user stories.</p>
+    </div>
+  </section>
+ 
+  <div class="projects-section">
+    <div class="featured-project">
+      <div class="fp-banner">
+        <div class="fp-title">GT Movies Store</div>
+        <div class="fp-subtitle">Django 5 · Python · SQLite · Bootstrap</div>
+      </div>
+ 
+      <div class="fp-body">
+        <div class="fp-content">
+ 
+          <h3>Who I Am</h3>
+          <p>I'm Anuj Patel, a Computer Engineering student at Georgia Tech graduating in
+          May 2029. Most of my work sits close to the hardware — embedded C, microcontrollers,
+          eventually VLSI — so a full-stack web application was deliberately outside my usual
+          territory, and building one end to end taught me how the software layers I normally
+          sit underneath actually fit together. There's more background on my
+          <a href="#" onclick="showPage('about')" class="github-link">About page</a>.</p>
+ 
+          <h3>What GT Movies Store Does</h3>
+          <p>GT Movies Store is a Django web application for browsing, reviewing, and buying
+          movies. The home and about pages introduce the store and its purpose. The movies page
+          lists the full catalog with a search box that filters by title, and clicking any movie
+          opens its detail page — description, price, a quantity selector, and every review other
+          users have left.</p>
+ 
+          <p>Creating an account unlocks the rest. Signed-in users can post a review on any movie
+          and edit or delete their own afterward, add movies to a cart in whatever quantity they
+          want, and check out to create an order. The cart page shows the running total with an
+          option to clear it, and the orders page lists every past purchase so users can track
+          what they've bought and spent.</p>
+ 
+          <p>Reviews are moderated by the community. Any signed-in user can report someone else's
+          review, as the Report button appears on every review except your own. Then, a page opens
+          so you can say your reasoning for the report. Submitting the report hides that review from
+          the movie page immediately and records the reason for an administrator, who can review the
+          report in the admin panel and restore the review if the report wasn't warranted. Reports
+          are stored rather than deleted, so nothing is lost and moderation decisions stay
+          reversible.</p>
+ 
+          <p>Administrators manage users, movies, reviews, and orders through the Django admin
+          interface, which is where the catalog is populated.</p>
+ 
+          <p>The app runs on Django 5 and Python over a SQLite database, using Django's template
+          system with Bootstrap for the front end. Authentication, session-based cart storage, and
+          the admin interface all come from Django rather than anything hand-rolled, and the
+          Bootstrap grid makes the layout responsive across desktop and mobile browsers.</p>
+ 
+          <div class="stack-row">
+            <span class="pc-tech">Django 5</span>
+            <span class="pc-tech">Python</span>
+            <span class="pc-tech">SQLite</span>
+            <span class="pc-tech">Django ORM</span>
+            <span class="pc-tech">Bootstrap</span>
+          </div>
+ 
+          <h3>How I Built It</h3>
+          <p>My approach was to work through <em>Django 5 for the Impatient</em> chapter by chapter
+          and build the store alongside it, rather than reading ahead and trying to assemble
+          everything at the end. That let me test each feature as I went. Copying code out of the
+          textbook caused its own problem, though: pasted snippets came through with stray line
+          breaks that broke the indentation Python depends on, so I often had to clean them up or
+          retype them by hand.</p>
+ 
+          <p>The part that required the most thought was the one user story the textbook doesn't
+          cover: the report feature. Before writing anything, I drafted my thinking in a Google Doc —
+          what the feature actually needed to do and which files it would touch. From there I went
+          back through the code I'd already written and used the existing patterns as a reference,
+          since the shape of a view and template I'd built for reviews was close enough to what I
+          needed that I could adapt it rather than start from scratch. Writing it out first meant
+          that by the time I opened the editor I already knew what I was implementing.</p>
+ 
+          <h3>Demo</h3>
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/P1wtLuAhV2g"
+              title="GT Movies Store demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+          <p>A walkthrough of the running application, covering the catalog and search, creating an
+          account, posting and reporting a review, and placing an order.</p>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <footer>
+    <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
+    <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span class="year-footer"></span></p>
+  </footer>
+</div>
+ 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  document.querySelectorAll('.year-footer').forEach(el => el.textContent = new Date().getFullYear());
-
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.classList.toggle('active', a.dataset.page === id);
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return false;
-  }
-
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  document.addEventListener('click', function(e) {
-    const menu = document.getElementById('mobileMenu');
-    const hamburger = document.querySelector('.hamburger');
-    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-      menu.classList.remove('open');
-    }
+document.getElementById('year').textContent = new Date().getFullYear();
+document.querySelectorAll('.year-footer').forEach(el => el.textContent = new Date().getFullYear());
+ 
+function showPage(id, updateHash = true) {
+  const target = document.getElementById('page-' + id);
+  if (!target) return false;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  target.classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === id);
   });
-
-  document.querySelectorAll('a[onclick]').forEach(a => {
-    a.addEventListener('click', function(e) { e.preventDefault(); });
-  });
+  if (updateHash) history.pushState(null, '', '#' + id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+ 
+function routeFromHash() {
+  const id = (location.hash || '#home').slice(1);
+  showPage(document.getElementById('page-' + id) ? id : 'home', false);
+}
+ 
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+ 
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+ 
+document.querySelectorAll('a[onclick]').forEach(a => {
+  a.addEventListener('click', function(e) { e.preventDefault(); });
+});
+ 
+routeFromHash();
+window.addEventListener('popstate', routeFromHash);
 </script>
+ 
 </body>
 </html>
+ 
