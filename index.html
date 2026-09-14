@@ -831,20 +831,17 @@ footer .gt-logo { font-family: var(--font-display); color: var(--white); font-we
  
           <h3>Who I Am</h3>
           <p>I'm Anuj Patel, a Computer Engineering student at Georgia Tech graduating in
-          May 2029. Most of my work sits close to the hardware — embedded C, microcontrollers,
-          eventually VLSI — so a full-stack web application was deliberately outside my usual
-          territory, and building one end to end taught me how the software layers I normally
-          sit underneath actually fit together. There's more background on my
+          May 2029. There's more background on my
           <a href="#" onclick="showPage('about')" class="github-link">About page</a>.</p>
  
           <h3>What GT Movies Store Does</h3>
           <p>GT Movies Store is a Django web application for browsing, reviewing, and buying
           movies. The home and about pages introduce the store and its purpose. The movies page
           lists the full catalog with a search box that filters by title, and clicking any movie
-          opens its detail page — description, price, a quantity selector, and every review other
+          opens its detail page, which has its description, price, a quantity selector, and every review other
           users have left.</p>
  
-          <p>Creating an account unlocks the rest. Signed-in users can post a review on any movie
+          <p>Users who create and sign into an account can post a review on any movie
           and edit or delete their own afterward, add movies to a cart in whatever quantity they
           want, and check out to create an order. The cart page shows the running total with an
           option to clear it, and the orders page lists every past purchase so users can track
@@ -862,17 +859,7 @@ footer .gt-logo { font-family: var(--font-display); color: var(--white); font-we
           interface, which is where the catalog is populated.</p>
  
           <p>The app runs on Django 5 and Python over a SQLite database, using Django's template
-          system with Bootstrap for the front end. Authentication, session-based cart storage, and
-          the admin interface all come from Django rather than anything hand-rolled, and the
-          Bootstrap grid makes the layout responsive across desktop and mobile browsers.</p>
- 
-          <div class="stack-row">
-            <span class="pc-tech">Django 5</span>
-            <span class="pc-tech">Python</span>
-            <span class="pc-tech">SQLite</span>
-            <span class="pc-tech">Django ORM</span>
-            <span class="pc-tech">Bootstrap</span>
-          </div>
+          system with Bootstrap for the front end.</p>
  
           <h3>How I Built It</h3>
           <p>My approach was to work through <em>Django 5 for the Impatient</em> chapter by chapter
