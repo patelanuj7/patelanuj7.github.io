@@ -188,7 +188,7 @@
   .img-placeholder.green { background: linear-gradient(135deg, #1a4a2f, #2a6a4f); }
   .img-placeholder.purple { background: linear-gradient(135deg, #2a1a5f, #4a2a8f); }
   .img-placeholder.dark { background: linear-gradient(135deg, #1a1a2f, #2a2a4f); }
-  .quick-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .quick-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .quick-link-card {
     background: var(--white); border: 1px solid var(--border); border-radius: 8px;
     padding: 1.8rem 1.5rem; text-align: center;
@@ -364,7 +364,6 @@
     <li><a href="#" onclick="showPage('home')" class="active" data-page="home">Home</a></li>
     <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
     <li><a href="#" onclick="showPage('resume')" data-page="resume">Resume</a></li>
-    <li><a href="#" onclick="showPage('goals')" data-page="goals">Career Goals</a></li>
     <li><a href="#" onclick="showPage('projects')" data-page="projects">Projects</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -376,7 +375,6 @@
   <a href="#" onclick="showPage('home');toggleMenu()">🏠 Home</a>
   <a href="#" onclick="showPage('about');toggleMenu()">👤 About Me</a>
   <a href="#" onclick="showPage('resume');toggleMenu()">📄 Resume</a>
-  <a href="#" onclick="showPage('goals');toggleMenu()">🎯 Career Goals</a>
   <a href="#" onclick="showPage('projects');toggleMenu()">🔬 Projects</a>
 </div>
 
@@ -441,11 +439,6 @@
           <div class="ql-icon">📄</div>
           <div class="ql-title">Resume</div>
           <div class="ql-desc">View and download my resume.</div>
-        </a>
-        <a class="quick-link-card" onclick="showPage('goals')">
-          <div class="ql-icon">🎯</div>
-          <div class="ql-title">Career Goals</div>
-          <div class="ql-desc">My ECE Roadmap and long-term aspirations.</div>
         </a>
         <a class="quick-link-card" onclick="showPage('projects')">
           <div class="ql-icon">🔬</div>
@@ -543,10 +536,8 @@
         <p>After growing up in Alpharetta and attending Denmark High School, I realized through both my classroom coding
           projects and independent exploration that I love building software that solves real problems, and that I'm just as
           curious about the hardware that makes modern computing possible.</p>
-        <p>At Georgia Tech, I'm currently part of a VIP team working with IODA (Internet Outage Detection and Analysis), where I'm gaining
-          hands-on experience in monitoring and analyzing global internet connectivity. Looking ahead, I plan to participate in the ECE
-          Opportunity Research Scholars (ORS) program next year to further bridge the gap between my software and hardware skills
-          through research.</p>
+        <p>At Georgia Tech, I was part of a VIP team working with IODA (Internet Outage Detection and Analysis), where I built Python tooling for monitoring and
+          analyzing global internet connectivity, and this past summer I interned as a software engineer at the nonprofit Revved Up Kids.</p>
         <p>Looking ahead, I'm pursuing software engineering roles, with a long-term interest in systems, high-performance computing, and the
           hardware-software interface. Feel free to explore my projects to see what I've been working on.</p>
       </div>
@@ -610,89 +601,6 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     PAGE: CAREER GOALS
-════════════════════════════════════════════════ -->
-<div id="page-goals" class="page">
-  <section class="about-hero">
-    <div class="page-hero-inner">
-      <h1 class="page-title">Career Goals</h1>
-    </div>
-  </section>
-
-  <div class="roadmap-section">
-    <h2 class="section-title">Where I'm Headed &amp; How I'll Get There</h2>
-
-    <div class="roadmap-intro">
-      <p>In the next 10–15 years, I envision myself as someone who specializes in the hardware-software interface of the next generation of semiconductors. My goal is to lead the design of computing systems that integrate VLSI logic with optimized software.</p>
-      <p>I am driven by the need for energy efficient computing. As the demand for AI and global connectivity grows, our current hardware is reaching its thermal and power limits. I want to use my skills in Verilog and hardware-software design to build processors that provide more efficient performance to ensure technological innovation doesn't come at the cost of our planet's environment.</p>
-    </div>
-
-    <div class="roadmap-phases">
-      <div class="phase-item">
-        <div class="phase-number">1</div>
-        <div class="phase-card">
-          <div class="phase-timeline">Now → Year 2 · Foundation Phase</div>
-          <div class="phase-title">Build a Rock-Solid Academic Foundation</div>
-          <p class="phase-desc">My focus is mastering the SysArch and CHEA threads, specifically excelling in Digital Design and Hardware-Software Systems. I am prioritizing building a strong network through study groups and technical clubs to foster collaborative learning. I want to gain hands-on experience through the ORS program and maintain a strong GPA for recruiting in the future.</p>
-          <div class="phase-milestones">
-            <span class="milestone-tag">ECE Core Courses</span>
-            <span class="milestone-tag">Math Foundations</span>
-            <span class="milestone-tag">Research Skills</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-item">
-        <div class="phase-number">2</div>
-        <div class="phase-card">
-          <div class="phase-timeline">Year 2–3 · Exploration Phase</div>
-          <div class="phase-title">Explore Specializations &amp; Gain Real-World Experience</div>
-          <p class="phase-desc">During my sophomore and junior years, I plan to bridge theory and application by building hardware-software projects and strengthening my technical interview skills. My primary objective is to secure a junior-year internship at a semiconductor or high-performance computing firm where I can apply my Verilog and low-level programming skills.</p>
-          <div class="phase-milestones">
-            <span class="milestone-tag">First Internship</span>
-            <span class="milestone-tag">Undergraduate Research</span>
-            <span class="milestone-tag">Technical Electives</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-item">
-        <div class="phase-number">3</div>
-        <div class="phase-card">
-          <div class="phase-timeline">Year 3–4 · Focus Phase</div>
-          <div class="phase-title">Specialize, Lead, and Prepare for Launch</div>
-          <p class="phase-desc">In my final years, I will focus on a high-impact Senior Design capstone and gaining more research experience through the GTRI. By taking on a leadership role within clubs or my VIP team, I intend to mentor younger students while recruiting for a role post-graduation.</p>
-          <div class="phase-milestones">
-            <span class="milestone-tag">Senior Capstone</span>
-            <span class="milestone-tag">Break into the Industry</span>
-            <span class="milestone-tag">Leadership Roles</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-item">
-        <div class="phase-number">4</div>
-        <div class="phase-card">
-          <div class="phase-timeline">Post-Graduation · Career Launch</div>
-          <div class="phase-title">Make a Lasting Impact in the Field</div>
-          <p class="phase-desc">In my first five years post-graduation, I aim to be a Hardware Architect designing specialized silicon that powers the next generation of AI. My goal is to solve the efficiency bottlenecks of modern hardware, contributing to product releases that provide massive performance-per-watt gains. This phase will set the stage for my long-term vision: making global computing more sustainable.</p>
-          <div class="phase-milestones">
-            <span class="milestone-tag">Full-Time Role</span>
-            <span class="milestone-tag">Hardware Architect</span>
-            <span class="milestone-tag">Semiconductors</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p><span class="gt-logo">Georgia Tech</span> · Computer Engineering</p>
-    <p style="margin-top:0.5rem;">ePortfolio by Anuj Patel · <span class="year-footer"></span></p>
-  </footer>
-</div>
-
-<!-- ═══════════════════════════════════════════════
      PAGE: PROJECTS
 ════════════════════════════════════════════════ -->
 <div id="page-projects" class="page">
@@ -741,6 +649,34 @@
           <span class="pc-tech">React</span>
           <span class="pc-tech">Python</span>
           <a class="github-link" style="font-size:12px; margin-left:auto;" href="https://github.com/patelanuj7/cicd-pipeline-simulator" target="_blank">GitHub &rarr;</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="pc-body">
+          <div class="pc-category">Software &middot; Revved Up Kids, Summer 2026</div>
+          <div class="pc-title">Copilot Studio Chatbot Testing and Redesign</div>
+          <p class="pc-desc">While interning at Revved Up Kids, I tested a Copilot Studio chatbot by building a Python static analyzer for its YAML topics and an
+            interpreter that traces all of its roughly 11,600 conversation paths. The tooling caught 11 logic bugs, and I redesigned the bot into a router architecture. Built with AI assistance (Claude) under my direction.</p>
+        </div>
+        <div class="pc-footer">
+          <span class="pc-tech">Python</span>
+          <span class="pc-tech">YAML</span>
+          <span class="pc-tech">Copilot Studio</span>
+          <span class="pc-tech">pytest</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="pc-body">
+          <div class="pc-category">Software &middot; CS 2340, September 2026</div>
+          <div class="pc-title">GT Movies Store</div>
+          <p class="pc-desc">A Django web app for browsing, reviewing, and buying movies, built from user stories. It has searchable catalog and detail pages, accounts, review editing, a cart with checkout, and order history.
+            I designed the report feature on my own: reporting a review hides it immediately and records the reason for an admin, who can restore it from the admin panel.</p>
+        </div>
+        <div class="pc-footer">
+          <span class="pc-tech">Django 5</span>
+          <span class="pc-tech">Python</span>
+          <span class="pc-tech">SQLite</span>
+          <span class="pc-tech">Bootstrap</span>
         </div>
       </div>
     </div>
